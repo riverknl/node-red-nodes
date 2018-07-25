@@ -1,0 +1,478 @@
+[
+  {
+    "id": "d7cabe5a.590d5",
+    "type": "debug",
+    "z": "466c6697.c981b",
+    "name": "Debug",
+    "active": false,
+    "console": "false",
+    "complete": "payload",
+    "x": 1150,
+    "y": 320,
+    "wires": []
+  },
+  {
+    "id": "7f133f9c.8f7aa8",
+    "type": "mqtt in",
+    "z": "466c6697.c981b",
+    "name": "mqtt-sub",
+    "topic": "stat/balkon/POWER",
+    "qos": "2",
+    "broker": "18afb6e3.c7a179",
+    "x": 940,
+    "y": 340,
+    "wires": [
+      [
+        "d7cabe5a.590d5"
+      ]
+    ]
+  },
+  {
+    "id": "7d4f05c8.a01554",
+    "type": "mqtt out",
+    "z": "466c6697.c981b",
+    "name": "mqtt-pub",
+    "topic": "cmnd/balkon/POWER",
+    "qos": "1",
+    "retain": "",
+    "broker": "18afb6e3.c7a179",
+    "x": 1160,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "2e8999c8.bb606e",
+    "type": "ui_switch",
+    "z": "466c6697.c981b",
+    "name": "Balkon licht aan/uit",
+    "label": "Balkon Licht",
+    "group": "c54c1109.687c68",
+    "order": 0,
+    "width": "6",
+    "height": "1",
+    "passthru": true,
+    "decouple": "false",
+    "topic": "cmnd/balkon/POWER",
+    "style": "",
+    "onvalue": "ON",
+    "onvalueType": "str",
+    "onicon": "fa-lightbulb-o",
+    "oncolor": "#ff9000",
+    "offvalue": "OFF",
+    "offvalueType": "str",
+    "officon": "fa-lightbulb-o",
+    "offcolor": "#000",
+    "x": 930,
+    "y": 280,
+    "wires": [
+      [
+        "7d4f05c8.a01554",
+        "d7cabe5a.590d5",
+        "496deb49.ee0ccc"
+      ]
+    ]
+  },
+  {
+    "id": "c78f4c06.41894",
+    "type": "ui_button",
+    "z": "466c6697.c981b",
+    "name": "Automatisch",
+    "group": "c54c1109.687c68",
+    "order": 0,
+    "width": "0",
+    "height": "0",
+    "passthru": false,
+    "label": "Automatisch",
+    "color": "",
+    "bgcolor": "",
+    "icon": "",
+    "payload": "auto",
+    "payloadType": "str",
+    "topic": "",
+    "x": 490,
+    "y": 280,
+    "wires": [
+      [
+        "7fae8956.8016e8"
+      ]
+    ]
+  },
+  {
+    "id": "7fae8956.8016e8",
+    "type": "bigtimer",
+    "z": "466c6697.c981b",
+    "outtopic": "cmnd/balkon/POWER",
+    "outpayload1": "ON",
+    "outpayload2": "OFF",
+    "name": "Big Timer",
+    "lat": "51.813297",
+    "lon": "4.690093",
+    "starttime": "5004",
+    "endtime": "5005",
+    "startoff": 0,
+    "endoff": 0,
+    "offs": 0,
+    "outtext1": "",
+    "outtext2": "",
+    "timeout": 1440,
+    "sun": true,
+    "mon": true,
+    "tue": true,
+    "wed": true,
+    "thu": true,
+    "fri": true,
+    "sat": true,
+    "jan": true,
+    "feb": true,
+    "mar": true,
+    "apr": true,
+    "may": true,
+    "jun": true,
+    "jul": true,
+    "aug": true,
+    "sep": true,
+    "oct": true,
+    "nov": true,
+    "dec": true,
+    "day1": 0,
+    "month1": 0,
+    "day2": 0,
+    "month2": 0,
+    "day3": 0,
+    "month3": 0,
+    "day4": 0,
+    "month4": 0,
+    "day5": 0,
+    "month5": 0,
+    "d1": 0,
+    "w1": 0,
+    "d2": 0,
+    "w2": 0,
+    "d3": 0,
+    "w3": 0,
+    "d4": 0,
+    "w4": 0,
+    "d5": 0,
+    "w5": 0,
+    "suspend": false,
+    "random": false,
+    "repeat": false,
+    "atstart": true,
+    "odd": false,
+    "even": false,
+    "x": 680,
+    "y": 280,
+    "wires": [
+      [
+        "2e8999c8.bb606e"
+      ],
+      [],
+      []
+    ]
+  },
+  {
+    "id": "496deb49.ee0ccc",
+    "type": "file",
+    "z": "466c6697.c981b",
+    "name": "",
+    "filename": "balkonlicht_status.txt",
+    "appendNewline": false,
+    "createDir": false,
+    "overwriteFile": "true",
+    "x": 1200,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "8fc0dde7.84b798",
+    "type": "file in",
+    "z": "466c6697.c981b",
+    "name": "",
+    "filename": "balkonlicht_status.txt",
+    "format": "utf8",
+    "chunk": false,
+    "sendError": false,
+    "x": 420,
+    "y": 680,
+    "wires": [
+      [
+        "3b2a7d32.3ee022"
+      ]
+    ]
+  },
+  {
+    "id": "41f1567b.76dc9",
+    "type": "telegrambot-command",
+    "z": "466c6697.c981b",
+    "bot": "47d57de0.f5ccb4",
+    "command": "/balkonlicht",
+    "commandType": "str",
+    "commandCase": false,
+    "x": 190,
+    "y": 640,
+    "wires": [
+      [
+        "8fc0dde7.84b798",
+        "8817402a.3fd34"
+      ]
+    ]
+  },
+  {
+    "id": "3b2a7d32.3ee022",
+    "type": "switch",
+    "z": "466c6697.c981b",
+    "name": "",
+    "property": "payload",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "ON",
+        "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "OFF",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 2,
+    "x": 610,
+    "y": 680,
+    "wires": [
+      [
+        "e91378b6.80062"
+      ],
+      [
+        "a44c2983.73fe78"
+      ]
+    ]
+  },
+  {
+    "id": "1d39e34d.5ea06d",
+    "type": "telegrambot-switch",
+    "z": "466c6697.c981b",
+    "name": "",
+    "bot": "47d57de0.f5ccb4",
+    "chatId": "000000000",
+    "question": "Instellingen Balkon Licht",
+    "answers": [
+      "Aan",
+      "Uit",
+      "Automatisch"
+    ],
+    "outputs": 3,
+    "autoAnswerCallback": false,
+    "timeoutValue": "",
+    "timeoutUnits": "",
+    "x": 600,
+    "y": 520,
+    "wires": [
+      [
+        "11334b2.07725b5"
+      ],
+      [
+        "40f063b2.fb7aa4"
+      ],
+      [
+        "f83263aa.b61b7"
+      ]
+    ]
+  },
+  {
+    "id": "f83263aa.b61b7",
+    "type": "template",
+    "z": "466c6697.c981b",
+    "name": "Automatisch",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "plain",
+    "template": "auto",
+    "output": "str",
+    "x": 810,
+    "y": 580,
+    "wires": [
+      [
+        "63641890.ba7ca",
+        "7fae8956.8016e8"
+      ]
+    ]
+  },
+  {
+    "id": "40f063b2.fb7aa4",
+    "type": "template",
+    "z": "466c6697.c981b",
+    "name": "Uit",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "plain",
+    "template": "OFF",
+    "output": "str",
+    "x": 790,
+    "y": 520,
+    "wires": [
+      [
+        "bc5c001e.6a6778",
+        "2e8999c8.bb606e"
+      ]
+    ]
+  },
+  {
+    "id": "11334b2.07725b5",
+    "type": "template",
+    "z": "466c6697.c981b",
+    "name": "Aan",
+    "field": "payload",
+    "fieldType": "msg",
+    "format": "handlebars",
+    "syntax": "mustache",
+    "template": "ON",
+    "output": "str",
+    "x": 790,
+    "y": 460,
+    "wires": [
+      [
+        "d8e4a100.ec8738",
+        "2e8999c8.bb606e"
+      ]
+    ]
+  },
+  {
+    "id": "d8e4a100.ec8738",
+    "type": "telegrambot-notify",
+    "z": "466c6697.c981b",
+    "name": "Aan",
+    "bot": "47d57de0.f5ccb4",
+    "chatId": "000000000",
+    "message": "Het balkon licht is aangezet 💡.",
+    "parseMode": "",
+    "x": 970,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "bc5c001e.6a6778",
+    "type": "telegrambot-notify",
+    "z": "466c6697.c981b",
+    "name": "Uit",
+    "bot": "47d57de0.f5ccb4",
+    "chatId": "000000000",
+    "message": "Het balkon licht is uitgezet.",
+    "parseMode": "",
+    "x": 970,
+    "y": 520,
+    "wires": []
+  },
+  {
+    "id": "63641890.ba7ca",
+    "type": "telegrambot-notify",
+    "z": "466c6697.c981b",
+    "name": "Automatisch",
+    "bot": "47d57de0.f5ccb4",
+    "chatId": "000000000",
+    "message": "Het balkon licht staat nu op Automatisch.",
+    "parseMode": "",
+    "x": 990,
+    "y": 580,
+    "wires": []
+  },
+  {
+    "id": "e91378b6.80062",
+    "type": "telegrambot-notify",
+    "z": "466c6697.c981b",
+    "name": "",
+    "bot": "47d57de0.f5ccb4",
+    "chatId": "000000000",
+    "message": "Het balkon licht staat aan.",
+    "parseMode": "",
+    "x": 780,
+    "y": 640,
+    "wires": []
+  },
+  {
+    "id": "a44c2983.73fe78",
+    "type": "telegrambot-notify",
+    "z": "466c6697.c981b",
+    "name": "",
+    "bot": "47d57de0.f5ccb4",
+    "chatId": "000000000",
+    "message": "Het balkon licht staat uit.",
+    "parseMode": "",
+    "x": 780,
+    "y": 720,
+    "wires": []
+  },
+  {
+    "id": "8817402a.3fd34",
+    "type": "delay",
+    "z": "466c6697.c981b",
+    "name": "",
+    "pauseType": "delay",
+    "timeout": "1",
+    "timeoutUnits": "seconds",
+    "rate": "1",
+    "nbRateUnits": "1",
+    "rateUnits": "second",
+    "randomFirst": "1",
+    "randomLast": "5",
+    "randomUnits": "seconds",
+    "drop": false,
+    "x": 380,
+    "y": 600,
+    "wires": [
+      [
+        "1d39e34d.5ea06d"
+      ]
+    ]
+  },
+  {
+    "id": "18afb6e3.c7a179",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "localhost",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "c54c1109.687c68",
+    "type": "ui_group",
+    "z": "",
+    "name": "Balkon Licht",
+    "tab": "1c277e9d.51f589",
+    "order": 1,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "47d57de0.f5ccb4",
+    "type": "telegrambot-config",
+    "z": "",
+    "botname": "BotName",
+    "usernames": "Username",
+    "chatIds": "000000000",
+    "pollInterval": "300"
+  },
+  {
+    "id": "1c277e9d.51f589",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Balkon",
+    "icon": "dashboard",
+    "order": 3
+  }
+]
