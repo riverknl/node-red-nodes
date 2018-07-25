@@ -1,0 +1,208 @@
+[
+  {
+    "id": "50932e09.633ab8",
+    "type": "ui_switch",
+    "z": "77e99c46.773214",
+    "name": "",
+    "label": "Ledstrip",
+    "group": "985f2675.7f2a8",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "decouple": "false",
+    "topic": "ledstrip_on_off",
+    "style": "",
+    "onvalue": "ON",
+    "onvalueType": "str",
+    "onicon": "",
+    "oncolor": "",
+    "offvalue": "OFF",
+    "offvalueType": "str",
+    "officon": "",
+    "offcolor": "",
+    "x": 280,
+    "y": 200,
+    "wires": [
+      [
+        "9a9b2805.9a71d"
+      ]
+    ]
+  },
+  {
+    "id": "67e4c7af.bcc6f",
+    "type": "debug",
+    "z": "77e99c46.773214",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 670,
+    "y": 500,
+    "wires": []
+  },
+  {
+    "id": "48899241.caae14",
+    "type": "mqtt out",
+    "z": "77e99c46.773214",
+    "name": "ledstrip pub",
+    "topic": "stat/woonkamer/televisiekast/ledstrip/cmd",
+    "qos": "1",
+    "retain": "true",
+    "broker": "18afb6e3.c7a179",
+    "x": 670,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "40e47b55.f7a084",
+    "type": "mqtt in",
+    "z": "77e99c46.773214",
+    "name": "",
+    "topic": "stat/woonkamer/televisiekast/ledstrip/cmd",
+    "qos": "2",
+    "broker": "18afb6e3.c7a179",
+    "x": 380,
+    "y": 500,
+    "wires": [
+      [
+        "67e4c7af.bcc6f"
+      ]
+    ]
+  },
+  {
+    "id": "b4c55619.84a0f",
+    "type": "ui_colour_picker",
+    "z": "77e99c46.773214",
+    "name": "",
+    "label": "Color",
+    "group": "985f2675.7f2a8",
+    "format": "rgb",
+    "outformat": "object",
+    "showSwatch": true,
+    "showPicker": false,
+    "showValue": false,
+    "showAlpha": true,
+    "showLightness": true,
+    "dynOutput": "false",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "topic": "ledstrip_color",
+    "x": 270,
+    "y": 300,
+    "wires": [
+      [
+        "9a9b2805.9a71d",
+        "53f125ae.1d6ff4"
+      ]
+    ]
+  },
+  {
+    "id": "2873a802.9579a8",
+    "type": "ui_dropdown",
+    "z": "77e99c46.773214",
+    "name": "",
+    "label": "Effect",
+    "place": "Select option",
+    "group": "985f2675.7f2a8",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "options": [
+      {
+        "label": "",
+        "value": "Solid",
+        "type": "str"
+      },
+      {
+        "label": "",
+        "value": "Fire",
+        "type": "str"
+      }
+    ],
+    "payload": "",
+    "topic": "ledstrip_effect",
+    "x": 270,
+    "y": 400,
+    "wires": [
+      [
+        "9a9b2805.9a71d",
+        "53f125ae.1d6ff4"
+      ]
+    ]
+  },
+  {
+    "id": "9a9b2805.9a71d",
+    "type": "function",
+    "z": "77e99c46.773214",
+    "name": "",
+    "func": "var newMsg = \"\";\n\nif (msg.topic === \"ledstrip_on_off\") {\n    if (msg.payload === \"ON\") {\n        newMsg = {payload: '{{\"state\":\"ON\"}}'};\n    } else {\n        newMsg = {payload: '{{\"state\":\"OFF\"}}'};\n    }\n    return newMsg;\n}\n\n\nif (msg.topic === \"ledstrip_color\") {\n    var obj = msg.payload;\n    obj['state'] = \"ON\";\n    \n    newMsg = {payload: obj}\n    return newMsg;\n}\n\n\nif (msg.topic === \"ledstrip_effect\") {\n    obj = { \"state\":\"ON\", \"effect\":msg.payload}\n    \n    newMsg = {payload: obj}\n    return newMsg;\n}",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 475,
+    "y": 279.25,
+    "wires": [
+      [
+        "48899241.caae14"
+      ]
+    ]
+  },
+  {
+    "id": "53f125ae.1d6ff4",
+    "type": "function",
+    "z": "77e99c46.773214",
+    "name": "",
+    "func": "if (msg.topic === \"ledstrip_color\" || msg.topic === \"ledstrip_effect\") {\n    message = {payload : \"ON\"}\n    return message;\n}\n\n",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 470,
+    "y": 380,
+    "wires": [
+      [
+        "50932e09.633ab8"
+      ]
+    ]
+  },
+  {
+    "id": "985f2675.7f2a8",
+    "type": "ui_group",
+    "z": "",
+    "name": "Televisiekast",
+    "tab": "20116d53.576bb2",
+    "order": 1,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "18afb6e3.c7a179",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "localhost",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "20116d53.576bb2",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Huiskamer",
+    "icon": "home",
+    "order": 2
+  }
+]

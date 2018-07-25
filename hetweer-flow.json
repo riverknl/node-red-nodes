@@ -1,0 +1,386 @@
+[
+  {
+    "id": "57d5fcb2.9901ac",
+    "type": "debug",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 410,
+    "y": 420,
+    "wires": []
+  },
+  {
+    "id": "26a13f1c.0bf9f8",
+    "type": "wunderground",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "lon": "",
+    "lat": "",
+    "city": "",
+    "country": "",
+    "x": 300,
+    "y": 300,
+    "wires": [
+      [
+        "57d5fcb2.9901ac",
+        "556872e8.ea6b8c"
+      ]
+    ]
+  },
+  {
+    "id": "ec8be412.2145e",
+    "type": "inject",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "300",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 130,
+    "y": 300,
+    "wires": [
+      [
+        "26a13f1c.0bf9f8"
+      ]
+    ]
+  },
+  {
+    "id": "b9901329.a732b8",
+    "type": "ui_gauge",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "group": "9f829fe0.bec958",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Temperatuur",
+    "label": "",
+    "format": "{{value}}°C",
+    "min": "-15",
+    "max": "40",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "18",
+    "seg2": "28",
+    "x": 710,
+    "y": 200,
+    "wires": []
+  },
+  {
+    "id": "77ea3b29.6ce9dc",
+    "type": "ui_chart",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "group": "9f829fe0.bec958",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "Temperatuur verloop",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "-20",
+    "ymax": "40",
+    "removeOlder": "2",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 740,
+    "y": 240,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "638b732c.b521fc",
+    "type": "ui_gauge",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "group": "666cab9d.f2af04",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "gtype": "wave",
+    "title": "",
+    "label": "%",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "100",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "",
+    "seg2": "",
+    "x": 690,
+    "y": 280,
+    "wires": []
+  },
+  {
+    "id": "36b16371.684e2c",
+    "type": "ui_gauge",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "group": "921a389d.168698",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "Windsnelheid",
+    "label": "km/u",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "150",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "",
+    "seg2": "",
+    "x": 720,
+    "y": 360,
+    "wires": []
+  },
+  {
+    "id": "b6baffd4.3a695",
+    "type": "ui_chart",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "group": "666cab9d.f2af04",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "Luchtvochtigheids verloop",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "",
+    "ymax": "",
+    "removeOlder": "2",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 760,
+    "y": 320,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "bac0fed8.047be8",
+    "type": "ui_chart",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "group": "921a389d.168698",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "label": "Windsnelheid verloop",
+    "chartType": "line",
+    "legend": "false",
+    "xformat": "HH:mm:ss",
+    "interpolate": "linear",
+    "nodata": "",
+    "dot": false,
+    "ymin": "",
+    "ymax": "",
+    "removeOlder": "2",
+    "removeOlderPoints": "",
+    "removeOlderUnit": "3600",
+    "cutout": 0,
+    "useOneColor": false,
+    "colors": [
+      "#1f77b4",
+      "#aec7e8",
+      "#ff7f0e",
+      "#2ca02c",
+      "#98df8a",
+      "#d62728",
+      "#ff9896",
+      "#9467bd",
+      "#c5b0d5"
+    ],
+    "useOldStyle": false,
+    "x": 740,
+    "y": 400,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "2d3ac51f.3bc69a",
+    "type": "ui_template",
+    "z": "6cd1c6ba.d2229",
+    "group": "d947e715.941d7",
+    "name": "",
+    "order": 0,
+    "width": "6",
+    "height": "3",
+    "format": "<div layout=\"row\">\n<p>\n{{msg.payload.forecast}}\n</p>\n<i class=\"fa-4x wi wi-wu-{{msg.payload.weatherIcon}}\"></i>\n</div>",
+    "storeOutMessages": false,
+    "fwdInMessages": false,
+    "templateScope": "local",
+    "x": 700,
+    "y": 480,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "8b40f2f8.586098",
+    "type": "ui_gauge",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "group": "921a389d.168698",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "gtype": "compass",
+    "title": "Windrichting",
+    "label": "",
+    "format": "{{value}}°",
+    "min": 0,
+    "max": "359",
+    "colors": [
+      "#00b500",
+      "#e6e600",
+      "#ca3838"
+    ],
+    "seg1": "",
+    "seg2": "",
+    "x": 710,
+    "y": 440,
+    "wires": []
+  },
+  {
+    "id": "556872e8.ea6b8c",
+    "type": "function",
+    "z": "6cd1c6ba.d2229",
+    "name": "",
+    "func": "var weatherIn = msg.payload.weather;\nvar tempc = { payload: msg.payload.tempc  };\nvar humidity = { payload: msg.payload.humidity  };\nvar windspeed = { payload: msg.payload.windspeed  };\nvar winddirection = { payload: msg.payload.winddirection  };\nvar forecast = msg.payload.forecast;\nvar weatherOut;\nif(weatherIn) {\n    if(weatherIn === \"Sunny\") {\n        weatherOut = \"sunny\"\n    }\n    else if(weatherIn === \"Clear\") {\n        weatherOut = \"sunny\"\n    }\n    else if(weatherIn === \"Cloudy\") {\n        weatherOut = \"cloudy\"\n    }    else if(weatherIn === \"Hazy\") {\n        weatherOut = \"haze\"\n    }    else if(weatherIn === \"Mostly Cloudy\") {\n        weatherOut = \"cloudy\"\n    }\n    else if(weatherIn === \"Mostly Suny\") {\n        weatherOut = \"cloudy\"\n    }  \n    else if(weatherIn === \"Partly Cloudy\") {\n        weatherOut = \"cloudy\"\n    }  \n    else if(weatherIn === \"Partly Sunny\") {\n        weatherOut = \"cloudy\"\n    }  \n    else if(weatherIn === \"Rain\") {\n        weatherOut = \"rain\"\n    }\n    else if(weatherIn === \"Snow\") {\n        weatherOut = \"snow\"\n    }  \n    else {\n        weatherOut = \"meteor\";\n    }\n}\n\nvar all = { payload : {\"forecast\": forecast, \"weatherIcon\": weatherOut}};\n\nreturn  [ tempc, humidity, windspeed, winddirection, all];",
+    "outputs": 5,
+    "noerr": 0,
+    "x": 490,
+    "y": 300,
+    "wires": [
+      [
+        "b9901329.a732b8",
+        "77ea3b29.6ce9dc"
+      ],
+      [
+        "638b732c.b521fc",
+        "b6baffd4.3a695"
+      ],
+      [
+        "36b16371.684e2c",
+        "bac0fed8.047be8"
+      ],
+      [
+        "8b40f2f8.586098"
+      ],
+      [
+        "2d3ac51f.3bc69a"
+      ]
+    ]
+  },
+  {
+    "id": "9f829fe0.bec958",
+    "type": "ui_group",
+    "z": "",
+    "name": "Buiten Temperatuur",
+    "tab": "f06b3ba6.be034",
+    "order": 2,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "666cab9d.f2af04",
+    "type": "ui_group",
+    "z": "",
+    "name": "Luchtvochtigheid",
+    "tab": "f06b3ba6.be034",
+    "order": 3,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "921a389d.168698",
+    "type": "ui_group",
+    "z": "",
+    "name": "Wind",
+    "tab": "f06b3ba6.be034",
+    "order": 4,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "d947e715.941d7",
+    "type": "ui_group",
+    "z": "",
+    "name": "Weers Verwachting",
+    "tab": "f06b3ba6.be034",
+    "order": 1,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "f06b3ba6.be034",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Het Weer",
+    "icon": "cloud",
+    "order": 1
+  }
+]
