@@ -1,0 +1,414 @@
+[
+  {
+    "id": "8d7c00cb.9d40d",
+    "type": "DeviceStats",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "mem": true,
+    "nw": true,
+    "load": true,
+    "hostname": false,
+    "useString": false,
+    "x": 290,
+    "y": 240,
+    "wires": [
+      [
+        "2230951e.8ccbba"
+      ]
+    ]
+  },
+  {
+    "id": "61ab8242.3a9ce4",
+    "type": "inject",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "60",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 110,
+    "y": 240,
+    "wires": [
+      [
+        "8d7c00cb.9d40d"
+      ]
+    ]
+  },
+  {
+    "id": "2230951e.8ccbba",
+    "type": "function",
+    "z": "eb77f32a.2a7f3",
+    "name": " sec2str",
+    "func": "var uptime = msg.payload.uptime;\n\nfunction sec2str(t){\n    var d = Math.floor(t/86400),\n        h = ('0'+Math.floor(t/3600) % 24).slice(-2),\n        m = ('0'+Math.floor(t/60)%60).slice(-2),\n        s = ('0' + t % 60).slice(-2);\n    return (d>0?d+'d ':'')+(h>0?h+':':'')+(m>0?m+':':'')+(t>60?s:s+'');\n}\n\nreturn [{ payload : sec2str(uptime) }];",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 460,
+    "y": 240,
+    "wires": [
+      [
+        "628b51a3.b6bba"
+      ]
+    ]
+  },
+  {
+    "id": "628b51a3.b6bba",
+    "type": "ui_text",
+    "z": "eb77f32a.2a7f3",
+    "group": "cac850fc.bb2678",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "name": "Orange Pi Uptime",
+    "label": "Uptime",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 650,
+    "y": 240,
+    "wires": []
+  },
+  {
+    "id": "14bf8714.22c979",
+    "type": "adv ping",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "host": "192.168.2.13",
+    "x": 310,
+    "y": 520,
+    "wires": [
+      [
+        "b3780222.c3eb38"
+      ]
+    ]
+  },
+  {
+    "id": "56bd1f59.29d11",
+    "type": "inject",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "600",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 150,
+    "y": 520,
+    "wires": [
+      [
+        "14bf8714.22c979"
+      ]
+    ]
+  },
+  {
+    "id": "b3780222.c3eb38",
+    "type": "function",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "func": "var newMsg = \"\";\n\n\n    if (msg.payload === false) {\n        newMsg = {payload: '{\"status\":\"Offline\"}'};\n    } else {\n        newMsg = {payload: '{\"status\":\"Online\"}'};\n    }\n    return newMsg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 450,
+    "y": 520,
+    "wires": [
+      [
+        "8dd83ea8.98952"
+      ]
+    ]
+  },
+  {
+    "id": "5184aae4.1b76d4",
+    "type": "ui_text",
+    "z": "eb77f32a.2a7f3",
+    "group": "5bd85bdb.6cd934",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "name": "Balkon Licht Status",
+    "label": "Status",
+    "format": "{{msg.payload.status}}",
+    "layout": "row-spread",
+    "x": 730,
+    "y": 520,
+    "wires": []
+  },
+  {
+    "id": "8dd83ea8.98952",
+    "type": "json",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "property": "payload",
+    "action": "",
+    "pretty": true,
+    "x": 570,
+    "y": 520,
+    "wires": [
+      [
+        "5184aae4.1b76d4"
+      ]
+    ]
+  },
+  {
+    "id": "9445079f.1e14d8",
+    "type": "mqtt in",
+    "z": "eb77f32a.2a7f3",
+    "name": "Balkon Uptime",
+    "topic": "tele/balkon/STATE",
+    "qos": "2",
+    "broker": "18afb6e3.c7a179",
+    "x": 160,
+    "y": 460,
+    "wires": [
+      [
+        "77e77d3.708ea04"
+      ]
+    ]
+  },
+  {
+    "id": "ad234599.16637",
+    "type": "ui_text",
+    "z": "eb77f32a.2a7f3",
+    "group": "5bd85bdb.6cd934",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "name": "Balkon Licht Uptime",
+    "label": "Uptime",
+    "format": "{{msg.payload.Uptime}}",
+    "layout": "row-spread",
+    "x": 540,
+    "y": 460,
+    "wires": []
+  },
+  {
+    "id": "77e77d3.708ea04",
+    "type": "json",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "property": "payload",
+    "action": "",
+    "pretty": true,
+    "x": 330,
+    "y": 460,
+    "wires": [
+      [
+        "ad234599.16637"
+      ]
+    ]
+  },
+  {
+    "id": "6ad543dc.29caac",
+    "type": "hostip",
+    "z": "eb77f32a.2a7f3",
+    "name": "Host IP",
+    "x": 300,
+    "y": 320,
+    "wires": [
+      [
+        "f49349aa.2fe29"
+      ]
+    ]
+  },
+  {
+    "id": "3062880.4e793f8",
+    "type": "inject",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "43200",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 130,
+    "y": 320,
+    "wires": [
+      [
+        "6ad543dc.29caac"
+      ]
+    ]
+  },
+  {
+    "id": "f49349aa.2fe29",
+    "type": "split",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "splt": "\\n",
+    "spltType": "str",
+    "arraySplt": "1",
+    "arraySpltType": "len",
+    "stream": true,
+    "addname": "",
+    "x": 450,
+    "y": 320,
+    "wires": [
+      [
+        "8c936b8e.0496a"
+      ]
+    ]
+  },
+  {
+    "id": "8c936b8e.0496a",
+    "type": "switch",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "property": "msg.payload.family",
+    "propertyType": "msg",
+    "rules": [
+      {
+        "t": "eq",
+        "v": "IPv4",
+        "vt": "str"
+      },
+      {
+        "t": "eq",
+        "v": "IPv6",
+        "vt": "str"
+      }
+    ],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 2,
+    "x": 590,
+    "y": 320,
+    "wires": [
+      [
+        "132fecf4.c9463b"
+      ],
+      [
+        "27132ef2.248232"
+      ]
+    ]
+  },
+  {
+    "id": "26423dcf.1e3d22",
+    "type": "ui_text",
+    "z": "eb77f32a.2a7f3",
+    "group": "cac850fc.bb2678",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "name": "Orange Pi IPv4",
+    "label": "IPv4",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 900,
+    "y": 300,
+    "wires": []
+  },
+  {
+    "id": "65b097de.f02d68",
+    "type": "ui_text",
+    "z": "eb77f32a.2a7f3",
+    "group": "cac850fc.bb2678",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "name": "Orange Pi IPv6",
+    "label": "IPv6",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "x": 900,
+    "y": 340,
+    "wires": []
+  },
+  {
+    "id": "132fecf4.c9463b",
+    "type": "function",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "func": "var tempc = { payload: msg.payload.address  };\n\n\nreturn tempc;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 730,
+    "y": 300,
+    "wires": [
+      [
+        "26423dcf.1e3d22"
+      ]
+    ]
+  },
+  {
+    "id": "27132ef2.248232",
+    "type": "function",
+    "z": "eb77f32a.2a7f3",
+    "name": "",
+    "func": "var tempc = { payload: msg.payload.address  };\n\n\nreturn tempc;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 730,
+    "y": 340,
+    "wires": [
+      [
+        "65b097de.f02d68"
+      ]
+    ]
+  },
+  {
+    "id": "7fe7bb78.dd3a74",
+    "type": "ui_text",
+    "z": "eb77f32a.2a7f3",
+    "group": "5bd85bdb.6cd934",
+    "order": 0,
+    "width": 0,
+    "height": 0,
+    "name": "Balkon Licht IPv4",
+    "label": "IPv4",
+    "format": "192.168.2.13",
+    "layout": "row-spread",
+    "x": 730,
+    "y": 560,
+    "wires": []
+  },
+  {
+    "id": "cac850fc.bb2678",
+    "type": "ui_group",
+    "z": "",
+    "name": "Orange Pi Status",
+    "tab": "3896212e.0a55b6",
+    "order": 1,
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "5bd85bdb.6cd934",
+    "type": "ui_group",
+    "z": "",
+    "name": "Status Balkon Licht",
+    "tab": "3896212e.0a55b6",
+    "disp": true,
+    "width": "6",
+    "collapse": false
+  },
+  {
+    "id": "18afb6e3.c7a179",
+    "type": "mqtt-broker",
+    "z": "",
+    "broker": "localhost",
+    "port": "1883",
+    "clientid": "",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": "",
+    "birthTopic": "",
+    "birthQos": "0",
+    "birthPayload": ""
+  },
+  {
+    "id": "3896212e.0a55b6",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Server Status",
+    "icon": "dashboard",
+    "order": 4
+  }
+]
